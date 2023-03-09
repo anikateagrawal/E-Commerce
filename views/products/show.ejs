@@ -1,0 +1,13 @@
+<% layout('./layout/boilerplate') %>
+
+<div class="card" style="width: 18rem;">
+    <img src="<%=products.img%>" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%=products.name%></h5>
+      <p class="card-text"><%=products.desc%></p>
+      <h3 class="card-text">Price: Rs.<%=products.price%></h3>
+      <a href="/products" class="btn btn-primary">ALL PRODUCTS</a>
+      <a href="/products/<%=products.id%>/edit" class="btn btn-primary">Update</a><br><br>
+      <form action="/products/<%=products.id%>?_method=delete" method="post"><button class="btn btn-primary">Delete</button></form>
+    </div>
+</div> 

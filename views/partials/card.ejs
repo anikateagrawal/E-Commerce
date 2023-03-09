@@ -1,0 +1,16 @@
+<div style="display: grid;grid-template-columns: auto auto auto auto; gap:20px; padding: 50px;">
+  <% for (let product of products){ %>
+     <div class="card" style="width: 18rem;">
+        <img src="<%=product.img%>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%=product.name%></h5>
+          <p class="card-text"><%=product.desc%></p>
+          <h3 class="card-text">Price: Rs.<%=product.price%></h3>
+          <a href="/products/<%=product.id%>" class="btn btn-primary">Show Product</a>
+          <a href="/products/<%=product.id%>/edit" class="btn btn-primary">Update</a>
+          <br><br>
+          <form action="/products/<%=product.id%>?_method=delete" method="post"><button class="btn btn-primary">Delete</button></form>
+        </div>
+      </div> 
+      <%}%>
+</div>

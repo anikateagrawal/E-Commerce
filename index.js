@@ -21,6 +21,7 @@ app.get('/',(req,res)=>{
 })
 app.use(reviewRouter);
 app.use(productRoutes);
+mongoose.set('strictQuery',true);
 mongoose.connect('mongodb+srv://Anikate7316ag:Anikate%4025@cluster0.ofjnmbo.mongodb.net/shopping-app')
 .then(()=>{
     console.log('DB connected');

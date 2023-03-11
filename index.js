@@ -7,10 +7,11 @@ const productRoutes=require('./routes/productRoutes');
 const methodOverride=require('method-override');
 const app=express();
 const seed=require('./seed');
-
+const reviewRouter=require('./routes/reviewsRoutes');
 app.use(methodOverride('_method'));
-
+app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended:true}));
+
 app.listen(port,()=>{
     console.log("server running at port "+port);
 });
@@ -18,11 +19,12 @@ app.listen(port,()=>{
 app.get('/',(req,res)=>{
     res.redirect('/products');
 })
+app.use(reviewRouter);
 app.use(productRoutes);
 mongoose.connect('mongodb+srv://Anikate7316ag:Anikate%4025@cluster0.ofjnmbo.mongodb.net/shopping-app')
 .then(()=>{
     console.log('DB connected');
-    seed(); 
+    // seed(); 
 }).catch((e)=>console.log(e));
 
 

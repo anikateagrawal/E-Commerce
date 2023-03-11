@@ -25,7 +25,8 @@ router.get('/products/:prdid/edit',async(req,res)=>{
 
 router.get('/products/:prdid',async(req,res)=>{
     const {prdid}=req.params;
-    const products=await product.findById(prdid); 
+    const products=await product.findById(prdid);
+    await products.populate('reviews'); 
     res.render('./products/show',{products});
 })
 
@@ -42,5 +43,5 @@ router.delete('/products/:prdid',async(req,res)=>{
     await product.findByIdAndDelete(prdid);
     console.log('product deleted');
     res.redirect('/products');
-})
+}) 
 module.exports=router;

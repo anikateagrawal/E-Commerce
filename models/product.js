@@ -5,7 +5,11 @@ const schema=new mongoose.Schema({
     name:String,
     img:String,
     price:Number,
-    desc:String
+    desc:String,
+    reviews:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Review'
+    }]
 });
 
 const model=mongoose.model('products',schema);

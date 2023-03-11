@@ -8,7 +8,7 @@ router.post('/products/:prdid/review',async(req,res)=>{
     const {rating,comment}=req.body;
     const review=await reviews.create({rating,comment});
     const product=await products.findById(prdid);
-    await product.reviews.push(review);
+    await product.reviews.splice(0,0,review);
     await product.save();
     console.log('success');
     res.redirect('/products/'+prdid);

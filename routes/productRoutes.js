@@ -14,6 +14,7 @@ router.post('/products/new',async(req,res)=>{
     const {name,img,price,desc}=req.body; 
     await product.create({name,img,price,desc});
     console.log("product added");
+    req.flash('message','Product added successfully');
     res.redirect('/products');
 })
 
@@ -27,6 +28,7 @@ router.get('/products/:prdid',async(req,res)=>{
     const {prdid}=req.params;
     const products=await product.findById(prdid);
     await products.populate('reviews'); 
+
     res.render('./products/show',{products});
 })
 
@@ -35,6 +37,7 @@ router.patch('/products/:prdid',async(req,res)=>{
     const {name,img,price,desc}=req.body;
     await product.findByIdAndUpdate(prdid,{name,img,price,desc});
     console.log("product updated");
+    req.flash('message','updated successfully');
     res.redirect('/products/'+prdid);
 })
 

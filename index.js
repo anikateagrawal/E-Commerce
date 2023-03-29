@@ -11,17 +11,34 @@ const flash=require('connect-flash');
 const app=express();
 const seed=require('./seed');
 const reviewRouter=require('./routes/reviewsRoutes');
+const authRoutes=require('./routes/authRoutes');
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
+const User=require('./models/user')
+
+
+
+passport.use(new LocalStrategy(User.authenticate()));
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 app.use(session({
     secret:'Fastest man live',
     resave:true,
     saveUninitialized:true,
-    cookie:{}
+    cookie:{
+        httpOnly:true,
+        expires:Date.now()+7*24*60*60*1000
+    }
 }));
 app.use(flash());
-
+app.use(passport.session());
 app.use((req,res,next)=>{
     res.locals.message=req.flash('message');
+    res.locals.error=req.flash('error');
     next();
 });
 
@@ -38,9 +55,11 @@ app.get('/',(req,res)=>{
 })
 app.use(reviewRouter);
 app.use(productRoutes);
+app.use(authRoutes);
 mongoose.set('strictQuery',true);
 const dburl='mongodb+srv://Anikate7316ag:Anikate%4025@cluster0.ofjnmbo.mongodb.net/shopping-app';
-mongoose.connect('mongodb+srv://Anikate7316ag:Anikate%4025@cluster0.ofjnmbo.mongodb.net/shopping-app')
+const dburl2='mongodb://127.0.0.1:27017/shopping-app';
+mongoose.connect(dburl)
 .then(()=>{
     console.log('DB connected');
     seed()

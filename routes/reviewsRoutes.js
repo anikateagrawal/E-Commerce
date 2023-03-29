@@ -11,6 +11,7 @@ router.post('/products/:prdid/review',async(req,res)=>{
     await product.reviews.splice(0,0,review);
     await product.save();
     console.log('success');
+    req.flash('message','Review added');
     res.redirect('/products/'+prdid);
 })
 

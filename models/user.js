@@ -6,7 +6,7 @@ const schema=new mongoose.Schema({
         type:String,
     },
     contact:{
-        type:number
+        type:Number
     },
     cart:[{
         type:mongoose.Schema.Types.ObjectId,

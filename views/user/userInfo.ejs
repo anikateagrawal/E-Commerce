@@ -1,0 +1,15 @@
+<% layout('./layout/boilerplate') %>
+
+<h2>DashBoard</h2>
+
+<div class="col-lg-6">
+    <div class="card" style="width: 18rem">
+      <img src="<%=user.img%>" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title"><%=user.username%></h5>
+        <p class="card-text">Email: <%=user.email%></p>
+        <p class="card-text">Contact No: <%=user.contact%></p>
+        <a href="#" class="btn btn-secondary">Edit Details</a>
+      </div>
+    </div>
+  </div>

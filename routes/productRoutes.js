@@ -13,7 +13,7 @@ router.get('/products/new',isLoggedIn,(req,res)=>{
 })
 router.post('/products/new',isLoggedIn,async(req,res)=>{
     const {name,img,price,desc}=req.body; 
-    await product.create({name,img,price,desc});
+    await product.create({name,img,price,desc,creator:req.user.id});
     console.log("product added");
     req.flash('message','Product added successfully');
     res.redirect('/products');
@@ -42,7 +42,7 @@ router.patch('/products/:prdid',isLoggedIn,async(req,res)=>{
     res.redirect('/products/'+prdid);
 })
 
-router.delete('/products/:prdid',async(req,res)=>{
+router.delete('/products/:prdid',isLoggedIn,async(req,res)=>{
     const {prdid}=req.params;
     await product.findByIdAndDelete(prdid);
     console.log('product deleted');

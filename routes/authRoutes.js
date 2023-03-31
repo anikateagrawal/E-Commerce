@@ -10,8 +10,8 @@ router.get('/signup',(req,res)=>{
 
 router.post('/signup',async(req,res)=>{
     try{
-        const {username,password,email}=req.body;
-        const user=new User({username,email});
+        const {username,password,email,contact}=req.body;
+        const user=new User({username,email,contact});
         await User.register(user,password);
         req.flash('message','you have registered successfully');
         res.redirect('/login');
@@ -32,8 +32,12 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login'
 })
 
 
-router.get('/logout',async(req,res)=>{
-    await req.logout();
-    res.redirect('/products');
+router.get('/logout',(req,res)=>{
+    req.logout((e)=>{
+        if(e){
+            res.flash('error',e.message);
+        }
+        res.redirect('/products');
+    });
 })
 module.exports=router;

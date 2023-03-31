@@ -15,7 +15,7 @@ const authRoutes=require('./routes/authRoutes');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 const User=require('./models/user')
-
+const userRoutes=require('./routes/userRoutes');
 
 
 passport.use(new LocalStrategy(User.authenticate()));
@@ -34,9 +34,15 @@ app.use(session({
         expires:Date.now()+7*24*60*60*1000
     }
 }));
+
+
 app.use(flash());
+
+
 app.use(passport.session());
+
 app.use((req,res,next)=>{
+    res.locals.user=req.user;
     res.locals.message=req.flash('message');
     res.locals.error=req.flash('error');
     next();
@@ -56,16 +62,20 @@ app.get('/',(req,res)=>{
 app.use(reviewRouter);
 app.use(productRoutes);
 app.use(authRoutes);
+app.use(userRoutes);
+
 mongoose.set('strictQuery',true);
+
 const dburl='mongodb+srv://Anikate7316ag:Anikate%4025@cluster0.ofjnmbo.mongodb.net/shopping-app';
 const dburl2='mongodb://127.0.0.1:27017/shopping-app';
+
 mongoose.connect(dburl)
 .then(()=>{
     console.log('DB connected');
-    seed()
+    // seed()
 }).catch((e)=>console.log(e));
 
-setInterval(seed,24*60*60*1000);
+// setInterval(seed,24*60*60*1000);
 
 app.use(express.static(path.join(__dirname,'public')));
 

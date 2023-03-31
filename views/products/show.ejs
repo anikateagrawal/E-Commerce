@@ -10,12 +10,12 @@
         <p class="card-text"><%=products.desc%></p>
         <h3 class="card-text">Price: Rs.<%=products.price%></h3>
         <a href="/products" class="btn btn-secondary">ALL PRODUCTS</a>
-        <a href="/products/<%=products.id%>/edit" class="btn btn-success"
-          >Update</a
-        ><br /><br />
-        <form action="/products/<%=products.id%>?_method=delete" method="post">
+        <% if(user && products.creator == user.id) { %>
+          <a href="/products/<%=products.id%>/edit" class="btn btn-primary my-3">Update</a>
+        <form action="/products/<%=products.id%>?_method=delete" method="post" class="d-inline">
           <button class="btn btn-danger">Delete</button>
         </form>
+          <%}%>
       </div>
     </div>
   </div>
@@ -24,15 +24,7 @@
       <form action="/products/<%=products.id%>/review" method="post">
         <h1>Add Comment</h1>
         <fieldset class="starability-basic">
-          <input
-            type="radio"
-            id="no-rate"
-            class="input-no-rate"
-            name="rating"
-            value="0"
-            checked
-            aria-label="No rating."
-          />
+          <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
           <input type="radio" id="first-rate1" name="rating" value="1" />
           <label for="first-rate1" title="Terrible">1 star</label>
           <input type="radio" id="first-rate2" name="rating" value="2" />
@@ -52,9 +44,7 @@
 
         <button type="submit" class="btn btn-success">Add Review</button>
       </form>
-    </div>
-    <div>
-      <h1>Comments</h1>
+      <h1 class="mt-5">Comments</h1>
       <% for(let review of products.reviews){ %>
       <div class="card mb-3">
         <div class="card-body">
@@ -62,8 +52,10 @@
             Rated: <%=review.rating%> stars
           </p>
         <p>Comment: <%=review.comment%></p>
+        <% if(user && review.creator == user.id) { %>
         <form action="/products/<%=products.id%>/reviews/<%=review.id%>?_method=delete" method="post"><button class="btn btn-danger">delete</button></form>
-        </div>
+        <%}%>
+      </div>
       </div>
       <%}%>
     </div>

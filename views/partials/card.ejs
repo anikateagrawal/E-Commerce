@@ -1,5 +1,4 @@
 <div class="row"style="padding:50px 0px">
-  <!-- <div class="container"> -->
   <% for (let product of products){ %>
     <div class="col-lg-3 mb-3 ">
      <div class="card shadow-lg mx-auto" style="width: 18rem;">
@@ -8,10 +7,14 @@
           <h5 class="card-title"><%=product.name%></h5>
           <p class="card-text"><%=product.desc%></p>
           <h3 class="card-text">Price: Rs.<%=product.price%></h3>
-          <a href="/products/<%=product.id%>" class="btn btn-primary">Show Product</a>
-          <a href="/products/<%=product.id%>/edit" class="btn btn-primary">Update</a>
-          <!-- <br><br> -->
-          <!-- <form action="/products/<%=product.id%>?_method=delete" method="post"><button class="btn btn-primary">Delete</button></form> -->
+          <a href="/products/<%=product.id%>" class="btn btn-primary my-2">Show Product</a>
+          <form action="/products/cart/<%=product.id%>/add" method="post" class="d-inline"><button class="btn btn-primary">Add to Cart</button></form>
+          <% if(user && product.creator == user.id) { %>
+            <a href="/products/<%=product.id%>/edit" class="btn btn-primary my-3">Update</a>
+          <form action="/products/<%=product.id%>?_method=delete" method="post" class="d-inline">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+            <%}%>
         </div>
       </div> 
     </div>

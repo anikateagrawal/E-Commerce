@@ -1,0 +1,24 @@
+<% layout('./layout/boilerplate') %>
+
+<h2>Cart</h2>
+<% let total = 0 %>
+<div class="row"style="padding:50px 0px">
+    <% for (let product of products){  total+=product.price %>
+      <div class="col-lg-3 mb-3 ">
+       <div class="card shadow-lg mx-auto" style="width: 18rem;">
+          <img src="<%=product.img%>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%=product.name%></h5>
+            <p class="card-text"><%=product.desc%></p>
+            <h3 class="card-text">Price: Rs.<%=product.price%></h3>
+            <a href="/products/<%=product.id%>" class="btn btn-primary">Show Product</a>
+            <br><br>
+            <form action="/products/cart/<%=product.id%>?_method=delete" method="post"><button class="btn btn-danger">Remove from Cart</button></form>
+          </div>
+        </div> 
+      </div>
+        <%}%>
+  </div>
+
+<h1>Total= Rs. <%=total %></h1>
+<button class="btn btn-success">Place Order</button>

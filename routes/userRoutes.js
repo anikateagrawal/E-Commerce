@@ -40,4 +40,8 @@ router.get('/myproducts',isLoggedIn,async(req,res)=>{
     res.render('user/myproducts',{products});
 });
 
+router.get('/about',(req,res)=>{
+    res.render('user/creator');
+})
+
 module.exports=router;

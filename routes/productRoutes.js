@@ -25,11 +25,11 @@ router.get('/products/:prdid/edit',isLoggedIn,async(req,res)=>{
     res.render('./products/edit',{products});
 })
 
-router.get('/products/:prdid',isLoggedIn,async(req,res)=>{
+router.get('/products/:prdid',async(req,res)=>{
     const {prdid}=req.params;
     const products=await product.findById(prdid);
     await products.populate('reviews'); 
-
+    await products.populate('creator');
     res.render('./products/show',{products});
 })
 

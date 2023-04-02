@@ -4,6 +4,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const schema=new mongoose.Schema({
     email:{
         type:String,
+        trim:true
     },
     contact:{
         type:Number

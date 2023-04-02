@@ -2,7 +2,7 @@
 
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-4">
     <div class="card" style="width: 18rem">
       <img src="<%=products.img%>" class="card-img-top" alt="..." />
       <div class="card-body">
@@ -19,6 +19,19 @@
       </div>
     </div>
   </div>
+  <% if( products.creator) {%>
+  <div class="col-lg-4">
+    <h2> Seller Details</h2>
+    <div class="card" style="width: 18rem">
+      <img src="<%=products.creator.img%>" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title"><%=products.creator.username%></h5>
+        <p class="card-text">Email: <%=products.creator.email%></p>
+        <p class="card-text">Contact No: <%=products.creator.contact%></p>
+      </div>
+    </div>
+</div>
+<%}%>
   <div class="card col-lg-4">
     <div class="card-body">
       <form action="/products/<%=products.id%>/review" method="post">
@@ -51,7 +64,9 @@
           <p class="starability-result" data-rating="<%=review.rating%>">
             Rated: <%=review.rating%> stars
           </p>
+          <p>@<%=review.username%></p>
         <p>Comment: <%=review.comment%></p>
+
         <% if(user && review.creator == user.id) { %>
         <form action="/products/<%=products.id%>/reviews/<%=review.id%>?_method=delete" method="post"><button class="btn btn-danger">delete</button></form>
         <%}%>

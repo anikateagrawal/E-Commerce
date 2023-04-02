@@ -7,7 +7,7 @@ const { isLoggedIn } = require('../middleware');
 router.post('/products/:prdid/review',isLoggedIn,async(req,res)=>{
     const {prdid}=req.params;
     const {rating,comment}=req.body;
-    const review=await reviews.create({rating,comment,creator:req.user.id});
+    const review=await reviews.create({rating,comment,username:req.user.username,creator:req.user.id});
     const product=await products.findById(prdid);
     await product.reviews.splice(0,0,review);
     await product.save();

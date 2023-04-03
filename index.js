@@ -16,6 +16,10 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 const User=require('./models/user')
 const userRoutes=require('./routes/userRoutes');
+const MongoDBStore = require('express-mongodb-session')(session);
+
+const dburl='mongodb+srv://Anikate7316ag:Anikate%4025@cluster0.ofjnmbo.mongodb.net/shopping-app';
+const dburl2='mongodb://127.0.0.1:27017/shopping-app';
 
 
 passport.use(new LocalStrategy(User.authenticate()));
@@ -24,11 +28,21 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+const store = new MongoDBStore({
+    uri: dburl,
+    collection: 'mySessions'
+  });
+
+  store.on('error', function(error) {
+    console.log(error);
+  });
+
 
 app.use(session({
     secret:'Fastest man live',
     resave:true,
     saveUninitialized:true,
+    store:store,
     cookie:{
         httpOnly:true,
         expires:Date.now()+7*24*60*60*1000
@@ -66,14 +80,12 @@ app.use(userRoutes);
 
 mongoose.set('strictQuery',true);
 
-const dburl='mongodb+srv://Anikate7316ag:Anikate%4025@cluster0.ofjnmbo.mongodb.net/shopping-app';
-const dburl2='mongodb://127.0.0.1:27017/shopping-app';
 
 mongoose.connect(dburl)
 .then(()=>{
     console.log('DB connected');
     // seed()
-}).catch((e)=>console.log(e));
+}).catch((e)=>console.log(e)); 
 
 // setInterval(seed,24*60*60*1000);
 

@@ -25,6 +25,7 @@ const dburl=process.env.dbURL||'mongodb://127.0.0.1:27017/shopping-app';
 
 
 
+ 
 passport.use(new LocalStrategy(User.authenticate()));
 
 // use static serialize and deserialize of model for passport session support
@@ -74,8 +75,8 @@ app.listen(port,()=>{
 });
 
 app.get('/',(req,res)=>{
-    // res.redirect('/products');
-    res.send("connected");
+    res.redirect('/products');
+    // res.send("connected");
 })
 app.use(reviewRouter);
 app.use(productRoutes);

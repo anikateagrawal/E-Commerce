@@ -1,3 +1,4 @@
+if(process.env.NODE_ENV!='production')
 require('dotenv').config();
 const express=require('express');
 const path=require('path');
@@ -19,7 +20,6 @@ const userRoutes=require('./routes/userRoutes');
 const MongoDBStore = require('express-mongodb-session')(session);
 const dburl=process.env.dbURL;
 
- 
 passport.use(new LocalStrategy(User.authenticate()));
 
 // use static serialize and deserialize of model for passport session support
@@ -30,7 +30,7 @@ const store = new MongoDBStore({
     uri: dburl,
     collection: 'mySessions'
   });
-
+ 
   store.on('error', function(error) {
     console.log(error);
   });

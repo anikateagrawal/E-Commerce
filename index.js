@@ -1,15 +1,15 @@
+require('dotenv').config();
 const express=require('express');
 const path=require('path');
 const engine=require('ejs-mate');
-const port=4000;
+const port=process.env.port;
 const mongoose=require('mongoose');
 const productRoutes=require('./routes/productRoutes');
 const methodOverride=require('method-override');
 const session=require('express-session');
-const cookieParser=require('cookie-parser');
 const flash=require('connect-flash');
 const app=express();
-const seed=require('./seed');
+const seed=require('./seed'); 
 const reviewRouter=require('./routes/reviewsRoutes');
 const authRoutes=require('./routes/authRoutes');
 var passport = require('passport');
@@ -17,10 +17,7 @@ var LocalStrategy = require('passport-local');
 const User=require('./models/user')
 const userRoutes=require('./routes/userRoutes');
 const MongoDBStore = require('express-mongodb-session')(session);
-
-const dburl='mongodb+srv://Anikate7316ag:Anikate%4025@cluster0.ofjnmbo.mongodb.net/shopping-app';
-const dburl2='mongodb://127.0.0.1:27017/shopping-app';
-
+const dburl=process.env.dbURL;
 
 passport.use(new LocalStrategy(User.authenticate()));
 
@@ -32,7 +29,7 @@ const store = new MongoDBStore({
     uri: dburl2,
     collection: 'mySessions'
   });
-
+ 
   store.on('error', function(error) {
     console.log(error);
   });
@@ -72,6 +69,7 @@ app.listen(port,()=>{
 
 app.get('/',(req,res)=>{
     res.render('./products/home');
+
     // res.send("connected");
 })
 app.use(reviewRouter);

@@ -12,7 +12,9 @@ const schema=new mongoose.Schema({
     cart:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'products'
-    }]
+    }],
+    qty:[{type:Number}],
+    profile:String
 })
 
 schema.plugin(passportLocalMongoose);

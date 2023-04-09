@@ -12,7 +12,17 @@ router.post('/products/cart/:pid/add',isLoggedIn,async(req,res)=>{
     const uid=req.user.id;
     const {pid}=req.params;
     const user=await User.findById(uid);
-    user.cart.push(pid);
+    let i;
+    for(i=0;i<user.cart.length;i++){
+        if(user.cart[i]==pid){
+            user.qty[i]++;
+            break; 
+        }
+    }
+    if(i==user.cart.length){
+        user.cart.push(pid);
+        user.qty.push(1);
+    }
     await user.save();
     req.flash('message','product successfully added to cart');
     res.redirect('/products');
@@ -23,13 +33,21 @@ router.get('/cart',isLoggedIn,async(req,res)=>{
     await user.populate('cart');
     const products=user.cart;
     res.render('user/cart',{products});
-})
+})  
 
 router.delete('/products/cart/:pid',isLoggedIn,async(req,res)=>{
     const uid=req.user.id;
     const {pid}=req.params;
     const user=await User.findById(uid);
-    user.cart=user.cart.filter((e)=> e!=pid);
+    for(let i=0;i<user.cart.length;i++){
+        if(user.cart[i]==pid){
+            user.qty[i]--;
+        }
+        if(user.qty[i]==0){
+            user.qty.splice(i,1);
+            user.cart.splice(i,1);
+        }
+    }
     await user.save();
     req.flash('error','product removed from cart');
     res.redirect('/cart');

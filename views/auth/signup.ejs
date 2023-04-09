@@ -1,29 +1,30 @@
 <%- layout('./layout/boilerplate') %>
-<div class="col-lg-6 mx-auto">
-<form action="/signup" method="post">
-    <h1>Signup</h1>
-    <div class="mb-3">
-      <label for="username" class="form-label">Username</label>
-      <input type="text" class="form-control" id="username" name="username" required>
-    </div>
-    <div class="mb-3">
+  <div class="col-lg-6 mx-auto p-5">
+    <form action="/signup" method="post">
+      <h1>Signup</h1>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" required />
+      </div>
+      <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <div class="mb-3">
+        <input type="password" class="form-control" id="password" name="password" required />
+      </div>
+      <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-    </div>
-    <div class="mb-3">
-      <label for="contact" class="form-label">Contact</label>
-      <input type="number" class="form-control" id="contact" name="contact" required>
+        <input type="email" class="form-control" id="email" name="email" required />
+      </div>
+      <div class="mb-3">
+        <label for="contact" class="form-label">Contact</label>
+        <input type="number" class="form-control" id="contact" name="contact" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="profile">Register as:</label>
+        <input type="radio" name="profile" id="retailer" value="retailer" required /><label for="profile"
+          class="form-label">Retailer</label>
+        <input type="radio" name="profile" value="consumer" id="retailer" required /><label for="profile"
+          class="form-label">consumer</label>
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
   </div>
-  <div class="mb-3">
-    <label class="form-label" for="profile">Register as:</label>
-    <input type="radio" name="profile" id="retailer" value="retailer" required><label for="profile" class="form-label">Retailer</label>
-    <input  type="radio" name="profile" value="consumer" id="retailer" required><label for="profile" class="form-label">consumer</label>
-</div>
-    <button type="submit" class="btn btn-success">Submit</button>
-  </form>
-
-</div>

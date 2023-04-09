@@ -26,7 +26,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 const store = new MongoDBStore({
-    uri: dburl2,
+    uri: dburl,
     collection: 'mySessions'
   });
  
@@ -80,7 +80,7 @@ app.use(userRoutes);
 mongoose.set('strictQuery',true);
 
 
-mongoose.connect(dburl2)
+mongoose.connect(dburl)
 .then(()=>{
     console.log('DB connected');
     // seed()

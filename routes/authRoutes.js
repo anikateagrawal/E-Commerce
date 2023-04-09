@@ -26,7 +26,7 @@ router.get('/login',(req,res)=>{
     res.render('auth/login');
 })
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login',failureFlash: true }),(req, res) =>{
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),(req, res) =>{
     req.flash('message','login successful');
     res.redirect('/products');
 })

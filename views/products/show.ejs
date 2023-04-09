@@ -10,6 +10,7 @@
         <p class="card-text"><%=products.desc%></p>
         <h3 class="card-text">Price: Rs.<%=products.price%></h3>
         <a href="/products" class="btn btn-secondary">ALL PRODUCTS</a>
+        <form action="/products/cart/<%=products.id%>/add" method="post" class="d-inline"><button class="btn btn-primary">Add to Cart</button></form>
         <% if(user && products.creator == user.id) { %>
           <a href="/products/<%=products.id%>/edit" class="btn btn-primary my-3">Update</a>
         <form action="/products/<%=products.id%>?_method=delete" method="post" class="d-inline">

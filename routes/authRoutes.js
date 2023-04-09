@@ -10,8 +10,8 @@ router.get('/signup',(req,res)=>{
 
 router.post('/signup',async(req,res)=>{
     try{
-        const {username,password,email,contact}=req.body;
-        const user=new User({username,email,contact});
+        const {username,password,email,contact,profile}=req.body;
+        const user=new User({username,email,contact,profile});
         await User.register(user,password);
         req.flash('message','you have registered successfully');
         res.redirect('/login');

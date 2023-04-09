@@ -1,22 +1,22 @@
 <% if(!user) {%>
 <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
     <li class="nav-item">
-      <a class="nav-link" href="/signup">Signup</a>
+      <a class="nav-link" href="/signup" style="color: white;">Signup</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/login">Login</a>
+      <a class="nav-link" href="/login" style="color: white;">Login</a>
     </li>
 </ul>
 <%} else { %>
     <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
       <li class="nav-item">
-        <a href="/cart" class="nav-link"><i class="bi bi-cart"></i> cart</a>
+        <a href="/cart" class="nav-link" style="color: white;"><i class="bi bi-cart"></i> cart</a>
       </li>
         <li class="nav-item">
-            <a class="nav-link navbar-brand  active" href="/user"><%=user.username %></a>
+            <a class="nav-link navbar-brand  active" href="/user" style="color: white;"><%=user.username %></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
+          <a class="nav-link" href="/logout" style="color: white;">Logout</a>
         </li>
     </ul>
 <%} %>

@@ -26,7 +26,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 const store = new MongoDBStore({
-    uri: dburl,
+    uri: dburl2,
     collection: 'mySessions'
   });
  
@@ -68,7 +68,8 @@ app.listen(port,()=>{
 });
 
 app.get('/',(req,res)=>{
-    res.redirect('/products');
+    res.render('./products/home');
+
     // res.send("connected");
 })
 app.use(reviewRouter);
@@ -79,7 +80,7 @@ app.use(userRoutes);
 mongoose.set('strictQuery',true);
 
 
-mongoose.connect(dburl)
+mongoose.connect(dburl2)
 .then(()=>{
     console.log('DB connected');
     // seed()

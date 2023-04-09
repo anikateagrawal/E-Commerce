@@ -1,5 +1,5 @@
 <%- layout('./layout/boilerplate') %>
-<form action="/products/<%=products.id%>?_method=patch" method="post">
+<form action="/products/<%=products.id%>?_method=patch" class="p-5" method="post">
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
       <input type="text" class="form-control" id="name" name="name" value="<%=products.name%>">

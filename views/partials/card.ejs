@@ -5,7 +5,7 @@
         <img src="<%=product.img%>" class="card-img-top " style="height:200px" alt="...">
         <div class="card-body">
           <h5 class="card-title"><%=product.name%></h5>
-          <p class="card-text"><%=product.desc%></p>
+          <p class="card-text"><%=product.desc.substring(0,100)%>...</p>
           <h3 class="card-text">Price: Rs.<%=product.price%></h3>
           <a href="/products/<%=product.id%>" class="btn btn-primary my-2">Show Product</a>
           <form action="/products/cart/<%=product.id%>/add" method="post" class="d-inline"><button class="btn btn-primary">Add to Cart</button></form>

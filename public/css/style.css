@@ -1,5 +1,4 @@
 .home{
-    height: 90vh;
     width: 100%;
     margin-top: 8px;
     background-color: black;
@@ -13,19 +12,20 @@
     color: white;
     text-shadow: 2px 3px 5px white;
 }
+
 .button1{
     font-size: 2rem;
     text-decoration: none;
     background-color: white;
     color: black;
-    width: 12%;
+    width: 200px;
     border-radius: 30px;
     font-weight: bold;
     transition: 1s;
     box-shadow: 0px 2px 5px white;
 }
 .button1:hover{
-    width: 15%;
+    width: 230px;
     cursor: pointer;
 }
 .navbar{
@@ -44,4 +44,10 @@
 .carousel-item img{
     width: 60vw;
     height: 65vh;
+}
+ 
+@media  screen and (max-width:500px) {
+    .pp{
+        font-size:3rem;
+    }
 }
